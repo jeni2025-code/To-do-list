@@ -29,7 +29,12 @@ def get_todos(db: Session = Depends(get_db)):
 
 @app.post("/api/todos", response_model=TodoResponse, status_code=201)
 def create_todo(todo: TodoCreate, db: Session = Depends(get_db)):
-    db_todo = Todo(title=todo.title)
+    db_todo = Todo(
+        title=todo.title,
+        priority=todo.priority,
+        category=todo.category,
+        due_date=todo.due_date
+    )
     db.add(db_todo)
     db.commit()
     db.refresh(db_todo)
@@ -44,6 +49,12 @@ def update_todo(todo_id: int, todo: TodoUpdate, db: Session = Depends(get_db)):
         db_todo.title = todo.title
     if todo.completed is not None:
         db_todo.completed = todo.completed
+    if todo.priority is not None:
+        db_todo.priority = todo.priority
+    if todo.category is not None:
+        db_todo.category = todo.category
+    if todo.due_date is not None:
+        db_todo.due_date = todo.due_date
     db.commit()
     db.refresh(db_todo)
     return db_todo

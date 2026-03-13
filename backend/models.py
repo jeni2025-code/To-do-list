@@ -8,4 +8,7 @@ class Todo(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, nullable=False)
     completed = Column(Boolean, default=False)
+    priority = Column(String, default="Medium")  # High, Medium, Low
+    category = Column(String, default="Personal") # Work, Personal, etc.
+    due_date = Column(DateTime, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
