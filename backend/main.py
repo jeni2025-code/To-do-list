@@ -15,6 +15,10 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Todo List API")
 
+
+
+
+#abcd
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
