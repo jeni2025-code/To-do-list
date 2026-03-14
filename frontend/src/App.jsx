@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 
-const API_URL = '/api/todos'
+const API_BASE = import.meta.env.VITE_API_BASE_URL || ''
+const API_URL = `${API_BASE}/api/todos`
 
 function App() {
   const [todos, setTodos] = useState([])
